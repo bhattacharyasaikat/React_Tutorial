@@ -1,0 +1,82 @@
+import './App.css';
+import React,{Component} from"react" ;
+import Person from './components/Person';
+
+class App extends Component{
+  constructor(props){
+    super(props);
+    this.state={
+    peoples: [
+      {
+        name : "Saikat",
+        age: "19" ,
+      
+      }, 
+      {
+        name:"raj",age:"10",
+      } ,
+      {
+        name:"sayan",
+        age:"20",
+      },
+
+  // dynamic ... if we make changes  it will render automatically...
+  {
+    name:"demo_name",
+    age:"210",
+  },
+
+    ],
+    isShow:true,
+    } ;
+    this.toggleHandler = this.toggleHandler.bind(this) ;
+  }
+  buttonClickHandler(){
+  console.log(this.state)
+  }
+  toggleHandler(){
+
+    this.setState({isShow:!this.state.isShow})
+  }
+
+  //in which box I click, the data will be deleted
+  removeHandler=(peoplesIndex)=>{
+   const peoplesCopy = this.state.peoples ;
+  //  console.log(peoplesCopy)
+   peoplesCopy.splice(peoplesIndex,1) ; 
+  //  console.log(peoplesCopy) 
+   this.setState({peoples: peoplesCopy})
+  //Splice delete the data.. 1 means only single data needs to be deleted from the index
+
+  }
+  
+  render(){
+
+  
+    let  peoples ;
+    if(this.state.isShow){
+      peoples= this.state.peoples.map((manus, index)=>{
+        return <Person key={index} name={manus.name} age={manus.age} remove={()=>this.removeHandler(index)}/ > 
+        // Key is not a props. and it cannot be displayed. It needs unique value. Otherwise and error will be thrown in console 
+      }) ;
+    }
+    else{
+      peoples=" "
+    }
+    
+    return(
+      
+     <div className='App'>
+      <button onClick={this.toggleHandler}>Toggle</button>
+      {peoples}
+     </div>
+
+    ) ;
+
+      
+    
+  }
+}
+
+
+export default App;

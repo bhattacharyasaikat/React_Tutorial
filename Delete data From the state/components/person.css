@@ -1,0 +1,9 @@
+.label{
+    color: red;
+    
+}
+
+.border{
+    border: 3px solid brown;
+    border-radius: 5px;
+}
